@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://borfm64hew3d4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_safp5"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fx0nn"]
+points = PackedVector3Array(-2.03175, -0.28169, -2.03175, 2.03168, 0.289627, 2.03175, 2.03168, -0.28169, 2.03175, 2.03168, 0.289627, -2.03175, -2.03175, 0.289627, 2.03175, -2.03175, -0.28169, 2.03175, 2.03168, -0.28169, -2.03175, -2.03175, 0.289627, -2.03175)
+
+[node name="upright_check_area3D" type="Area3D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="upright_check_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00517583, 0.00675845, -0.00226641)
+visible = false
+mesh = SubResource("BoxMesh_safp5")
+
+[node name="uprich_check_collision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_fx0nn")

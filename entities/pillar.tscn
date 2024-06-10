@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://clbkx5y0dnspp"]
+
+[ext_resource type="Script" path="res://entities/upright_check.gd" id="1_6l0h0"]
+
+[sub_resource type="GDScript" id="GDScript_um4ei"]
+script/source = "extends RigidBody3D
+var number_of_throws: int = 0
+var initial_transform: Transform3D
+@onready var ball_thrown_node = $\"../../Player/TwistPivot/PitchPivot/Camera3D/RayCast_player\"
+func _ready():
+	ball_thrown_node.ball_thrown.connect(_on_ball_thrown)
+	initial_transform = global_transform
+	
+func _on_ball_thrown() -> void:
+	number_of_throws += 1
+	if number_of_throws == 3:
+		global_transform = initial_transform
+		global_transform.basis = Basis()
+		
+		linear_velocity = Vector3.ZERO
+		angular_velocity = Vector3.ZERO
+		
+		number_of_throws = 1
+
+
+func _physics_process(delta):
+	pass
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llb7i"]
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_26al7"]
+material = SubResource("StandardMaterial3D_llb7i")
+size = Vector3(0.5, 2, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sy1up"]
+points = PackedVector3Array(0.25, 0.926237, 0.25, -0.25, -0.956116, -0.25, -0.242064, -0.926237, 0.25, -0.25, 0.956116, -0.25, 0.25, -0.926237, -0.242064, -0.242064, 0.926237, 0.25, 0.25, 0.926237, -0.242064, 0.25, -0.926237, 0.25)
+
+[node name="pillar" type="RigidBody3D"]
+mass = 0.5
+script = SubResource("GDScript_um4ei")
+
+[node name="pillar_mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_26al7")
+
+[node name="pillar_collision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_sy1up")
+
+[node name="upright_check" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01171, 0)
+target_position = Vector3(0, -3, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(0.34947, 0.746289, 0.318432, 1)
+debug_shape_thickness = 4
+script = ExtResource("1_6l0h0")

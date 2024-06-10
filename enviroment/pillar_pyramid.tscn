@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://d06lr0grmjxqy"]
+
+[ext_resource type="Script" path="res://enviroment/point_aggregation.gd" id="1_3bysr"]
+[ext_resource type="PackedScene" uid="uid://clbkx5y0dnspp" path="res://entities/pillar.tscn" id="1_rmwtm"]
+[ext_resource type="PackedScene" uid="uid://borfm64hew3d4" path="res://enviroment/upright_check_area.tscn" id="2_rlf4p"]
+
+[node name="pillar_pyramid" type="Node3D"]
+script = ExtResource("1_3bysr")
+
+[node name="pillar1" parent="." instance=ExtResource("1_rmwtm")]
+
+[node name="pillar2" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1)
+
+[node name="pillar3" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.440255, 0.0008111, -0.985568)
+
+[node name="pillar4" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="pillar5" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="pillar6" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="pillar7" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
+
+[node name="pillar8" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -3)
+
+[node name="pillar9" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -3)
+
+[node name="pillar10" parent="." instance=ExtResource("1_rmwtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -3)
+
+[node name="upright_check_area3D" parent="." instance=ExtResource("2_rlf4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.10187, -1.61043)

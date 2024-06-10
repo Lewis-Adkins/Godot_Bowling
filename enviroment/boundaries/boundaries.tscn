@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dru8shjlmiroj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5kqqe"]
+size = Vector2(2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y23qe"]
+albedo_color = Color(1, 0.552941, 1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ywbcx"]
+points = PackedVector3Array(-1.03546, 0.035461, -5.03546, 1.02128, 0.035461, 5.03546, 1.02128, 0.035461, -5.03546, -1.03546, 0.035461, 5.03546)
+
+[node name="Boundaries" type="Node3D"]
+
+[node name="boundary_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.00652, 0)
+mesh = SubResource("PlaneMesh_5kqqe")
+surface_material_override/0 = SubResource("StandardMaterial3D_y23qe")
+
+[node name="boundary_staticbody3d" type="StaticBody3D" parent="boundary_mesh"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="boundary_collision" type="CollisionShape3D" parent="boundary_mesh/boundary_staticbody3d"]
+shape = SubResource("ConvexPolygonShape3D_ywbcx")
