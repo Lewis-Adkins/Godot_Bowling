@@ -1,30 +1,39 @@
 [gd_scene load_steps=6 format=3 uid="uid://clbkx5y0dnspp"]
 
-[ext_resource type="Script" path="res://entities/upright_check.gd" id="1_6l0h0"]
+[ext_resource type="Script" path="res://scripts/upright_check.gd" id="1_xbegr"]
 
 [sub_resource type="GDScript" id="GDScript_um4ei"]
-script/source = "extends RigidBody3D
+script/source = "### ATTACHED TO: entities/pillar.tscn ###
+
+extends RigidBody3D
+
 var number_of_throws: int = 0
 var initial_transform: Transform3D
+
 @onready var ball_thrown_node = $\"../../Player/TwistPivot/PitchPivot/Camera3D/RayCast_player\"
+@onready var reset_timer = $Timer
+
 func _ready():
 	ball_thrown_node.ball_thrown.connect(_on_ball_thrown)
 	initial_transform = global_transform
-	
+
 func _on_ball_thrown() -> void:
 	number_of_throws += 1
-	if number_of_throws == 3:
-		global_transform = initial_transform
-		global_transform.basis = Basis()
-		
-		linear_velocity = Vector3.ZERO
-		angular_velocity = Vector3.ZERO
-		
-		number_of_throws = 1
+	
+	if number_of_throws == 2:
+		reset_timer.start() # Start the timer after the second throw
 
 
-func _physics_process(delta):
-	pass
+func _on_timer_timeout():
+
+	global_transform = initial_transform
+	global_transform.basis = Basis()
+
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	
+	
+	number_of_throws = 0 # Reset the number of throws after reset
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llb7i"]
@@ -55,4 +64,10 @@ collide_with_areas = true
 collide_with_bodies = false
 debug_shape_custom_color = Color(0.34947, 0.746289, 0.318432, 1)
 debug_shape_thickness = 4
-script = ExtResource("1_6l0h0")
+script = ExtResource("1_xbegr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://crln2kflk0v3b"]
 
-[ext_resource type="Script" path="res://entities/ball_launch.gd" id="1_u5imd"]
+[ext_resource type="Script" path="res://scripts/ball_launch.gd" id="1_1ev6s"]
 [ext_resource type="Texture2D" uid="uid://3ueforejq675" path="res://assets/textures/pixar-ball.png" id="2_knf76"]
-[ext_resource type="Script" path="res://entities/ball_launch_camera.gd" id="3_jcrr3"]
+[ext_resource type="Script" path="res://scripts/ball_launch_camera.gd" id="3_llk2t"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6pign"]
 friction = 0.43
@@ -20,7 +20,7 @@ mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6pign")
 can_sleep = false
 freeze_mode = 1
-script = ExtResource("1_u5imd")
+script = ExtResource("1_1ev6s")
 
 [node name="ball_launch_mesh" type="MeshInstance3D" parent="."]
 layers = 9
@@ -41,7 +41,7 @@ autostart = true
 
 [node name="ball_launch_camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 2.568)
-script = ExtResource("3_jcrr3")
+script = ExtResource("3_llk2t")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="ball_launch_timer" to="." method="_on_ball_launch_timer_timeout"]

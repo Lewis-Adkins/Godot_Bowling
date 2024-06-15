@@ -1,3 +1,5 @@
+### ATTACHED TO: player.tscn - Player/TwistPivot/PitchPivot/Camera3D/RayCast_player ###
+
 extends RayCast3D
 
 @onready var hold_pos = $HoldPosition

@@ -1,3 +1,5 @@
+### ATTACHED TO: player.tscn - Player ###
+
 extends RigidBody3D
 
 var mouse_sensitivity := 0.001

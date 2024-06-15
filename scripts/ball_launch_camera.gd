@@ -1,3 +1,5 @@
+### ATTACHED TO: entities/ball_launch/ball_launch_camera ###
+
 extends Camera3D
 
 @onready var ball := get_parent()
@@ -9,4 +11,5 @@ func _process(delta):
 	
 	if position.z <= camera_stop_point_z:
 		position.z = camera_stop_point_z
+	
 

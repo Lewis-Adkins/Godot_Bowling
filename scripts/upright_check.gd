@@ -1,3 +1,5 @@
+### ATTACHED TO: entities/pillar/upright_check ###
+
 extends RayCast3D
 
 var is_knocked: int 

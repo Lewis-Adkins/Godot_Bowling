@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dborw6l1jokof"]
 
 [ext_resource type="Texture2D" uid="uid://e8s6433prgkb" path="res://assets/textures/bowling_score_sheet.jpg" id="1_qbs7d"]
-[ext_resource type="Script" path="res://enviroment/BowlingScoreSheet.gd" id="2_nafxj"]
+[ext_resource type="Script" path="res://scripts/BowlingScoreSheet.gd" id="2_nafxj"]
 
 [node name="ScoreScreen" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.629185)

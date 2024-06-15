@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://s7re5t268a3c" path="res://enviroment/boundaries/foul_line.tscn" id="4_tmrkx"]
 [ext_resource type="PackedScene" uid="uid://d06lr0grmjxqy" path="res://enviroment/pillar_pyramid.tscn" id="5_2mtjm"]
 [ext_resource type="PackedScene" uid="uid://cqv2702roktbm" path="res://entities/ball.tscn" id="5_n7uxm"]
-[ext_resource type="Script" path="res://frame_calculation.gd" id="6_u1bj6"]
+[ext_resource type="Script" path="res://scripts/frame_calculation.gd" id="6_u1bj6"]
 [ext_resource type="PackedScene" uid="uid://dborw6l1jokof" path="res://enviroment/score_screen.tscn" id="7_e0xra"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn5xl"]
@@ -74,7 +74,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020896, 1.48883, -33.2019)
 [node name="frame_calculation" type="Node3D" parent="."]
 script = ExtResource("6_u1bj6")
 
+[node name="next_frame_timer" type="Timer" parent="frame_calculation"]
+wait_time = 4.5
+one_shot = true
+
+[node name="strike_spare_timer" type="Timer" parent="frame_calculation"]
+wait_time = 0.2
+one_shot = true
+
 [node name="ScoreScreen" parent="." instance=ExtResource("7_e0xra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.51219, -8.54431)
 
 [connection signal="tree_entered" from="." to="frame_calculation" method="_on_world_tree_entered"]
+[connection signal="timeout" from="frame_calculation/next_frame_timer" to="frame_calculation" method="_on_next_frame_timer_timeout"]
+[connection signal="timeout" from="frame_calculation/strike_spare_timer" to="frame_calculation" method="_on_strike_spare_timer_timeout"]

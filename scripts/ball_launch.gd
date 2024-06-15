@@ -1,3 +1,5 @@
+### ATTACHED TO: entities/ball_launch.tscn ###
+
 extends RigidBody3D
 
 const SPEED = 200.0
@@ -23,9 +25,6 @@ func _physics_process(delta):
 
 func _on_ball_launch_timer_timeout():
 	queue_free()
-
-
-
 
 func _on_tree_entered():
 	pass # Replace with function body.

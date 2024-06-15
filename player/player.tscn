@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://diauyr686fq8"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_r6ef5"]
-[ext_resource type="Script" path="res://player/raycast_interact.gd" id="2_26vme"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r6ef5"]
+[ext_resource type="Script" path="res://scripts/raycast_interact.gd" id="2_26vme"]
 [ext_resource type="PackedScene" uid="uid://cyetd25ga0uh6" path="res://entities/rifle.tscn" id="3_6mx6s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lc8nt"]

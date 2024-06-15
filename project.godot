@@ -21,7 +21,8 @@ folder_colors={
 "res://assets/": "pink",
 "res://entities/": "green",
 "res://enviroment/": "red",
-"res://player/": "blue"
+"res://player/": "blue",
+"res://scripts/": "orange"
 }
 
 [input]

@@ -1,3 +1,5 @@
+### ATTACHED TO: enviroment/pillar_pyramid ###
+
 extends Node3D
 
 var number_of_pillars: int = 10

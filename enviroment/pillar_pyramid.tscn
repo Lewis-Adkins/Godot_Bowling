@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d06lr0grmjxqy"]
 
-[ext_resource type="Script" path="res://enviroment/point_aggregation.gd" id="1_3bysr"]
+[ext_resource type="Script" path="res://scripts/point_aggregation.gd" id="1_3bysr"]
 [ext_resource type="PackedScene" uid="uid://clbkx5y0dnspp" path="res://entities/pillar.tscn" id="1_rmwtm"]
 [ext_resource type="PackedScene" uid="uid://borfm64hew3d4" path="res://enviroment/upright_check_area.tscn" id="2_rlf4p"]
 
