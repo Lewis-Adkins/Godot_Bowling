@@ -82,9 +82,14 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="pillar_reset_timer" type="Timer" parent="frame_calculation"]
+wait_time = 2.955
+one_shot = true
+
 [node name="ScoreScreen" parent="." instance=ExtResource("7_e0xra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.51219, -8.54431)
 
 [connection signal="tree_entered" from="." to="frame_calculation" method="_on_world_tree_entered"]
 [connection signal="timeout" from="frame_calculation/next_frame_timer" to="frame_calculation" method="_on_next_frame_timer_timeout"]
 [connection signal="timeout" from="frame_calculation/strike_spare_timer" to="frame_calculation" method="_on_strike_spare_timer_timeout"]
+[connection signal="timeout" from="frame_calculation/pillar_reset_timer" to="frame_calculation" method="_on_pillar_reset_timer_timeout"]

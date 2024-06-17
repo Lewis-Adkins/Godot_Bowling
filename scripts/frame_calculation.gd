@@ -2,9 +2,16 @@ extends Node3D
 
 @onready var ball_thrown_node = $"../Player/TwistPivot/PitchPivot/Camera3D/RayCast_player"
 @onready var pillar_pyramid = $"../pillar_pyramid"
+
+
 @onready var next_frame_timer = get_node("next_frame_timer")
 @onready var strike_frame_timer = get_node("strike_spare_timer")
-@onready var 
+@onready var pillar_reset_timer = get_node("pillar_reset_timer")
+
+var pillars_in_pyramid: int = 10
+var a_pillar: Node
+var pillar_initial_transform: Transform3D
+
 var number_of_throws: int = 0
 var number_of_frames: int = 10
 
@@ -24,8 +31,8 @@ var spare_code: int = 10
 
 func _ready():
 	ball_thrown_node.ball_thrown.connect(_on_ball_thrown)
-	
-	
+
+
 func record_throw_score(score: int) -> int:
 
 	var throw_score: int = 0
@@ -37,31 +44,44 @@ func _on_ball_thrown() -> void:
 	
 	if number_of_throws == 2:
 		next_frame_timer.start()
+		
+func pillar_reset() -> void:
+	for pillar_index in range(1, pillars_in_pyramid + 1):
+		var pillar_name = "pillar" + str(pillar_index)
+		var pillar_node = pillar_pyramid.get_node(pillar_name)
 
-func strike():
-	frame_index += 1
-	final_score += all_frames["Frame #" + str(frame_index)][2]
-		
-	your_frame += 1
-	two_throw_frame_score = Vector3(0,0,0)
-		
-	number_of_throws = 0
-		
-	return [number_of_throws, your_frame, final_score]
+		pillar_node._on_timer_timeout()
+
+			
+
 	
 func _on_next_frame_timer_timeout():
+
 	frame_index += 1
 	final_score += all_frames["Frame #" + str(frame_index)][2]
 		
 	your_frame += 1
 	two_throw_frame_score = Vector3(0,0,0)
+	
+	
 		
 	number_of_throws = 0
-		
+
+
 	return [number_of_throws, your_frame, final_score]
 	
+func strike():
+	number_of_throws = 0
+	next_frame_timer.start()
+	pillar_reset_timer.start()
+	print("pillar timer:", pillar_reset_timer.time_left)
+	print("frame timer:", next_frame_timer.time_left)
+
 func _on_strike_spare_timer_timeout():
-	_on_next_frame_timer_timeout()
+	next_frame_timer.start()
+
+func _on_pillar_reset_timer_timeout():
+	pillar_reset()
 	
 func store_throw_score(pins_knocked: int, two_throw_frame_score: Vector3, recorded_throw_score: int):
 	recorded_throw_score = record_throw_score(pins_knocked)
@@ -69,7 +89,6 @@ func store_throw_score(pins_knocked: int, two_throw_frame_score: Vector3, record
 	
 func _process(delta):
 
-	
 	var sum_of_points = pillar_pyramid.sum_of_points
 	
 	frame_label = "Frame #" + str(your_frame) 
@@ -80,9 +99,8 @@ func _process(delta):
 		
 		two_throw_frame_score[0] = first_score
 		
-		if two_throw_frame_score[0] == 10:
-			
-			strike_frame_timer.start()
+		if two_throw_frame_score[0] == 10 && number_of_throws == 1:
+			strike()
 
 	elif number_of_throws == 2:
 		
@@ -91,24 +109,6 @@ func _process(delta):
 		second_score = second_score - two_throw_frame_score[0]
 		two_throw_frame_score[1] = second_score
 		
-	
-		
-
 	two_throw_frame_score_combined = two_throw_frame_score[0] + two_throw_frame_score[1]
 	two_throw_frame_score[2] = two_throw_frame_score_combined
 	
-
-	
-	print(all_frames)
-
-
-
-
-
-
-
-
-
-
-
-

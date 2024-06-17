@@ -8,6 +8,7 @@ extends Sprite3D
 
 func filling_score_card()->void:
 	
+	print(final_score)
 	var number_of_frames: int = all_frames.size()+1
 	var scores_per_frame: int = 4 # Score per frame + 1 because of iterator... its really 3
 	var frame_labels: Node
@@ -15,6 +16,10 @@ func filling_score_card()->void:
 	var final_score_label:Node
 	
 	final_score_label = get_node("Final_Score")
+	
+	var final_score_input: String = str(final_score)
+	
+	final_score_label.set_text(final_score_input)
 
 	
 	
@@ -37,3 +42,4 @@ func _ready():
 
 func _process(delta):
 	filling_score_card()
+	

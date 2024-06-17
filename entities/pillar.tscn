@@ -13,6 +13,10 @@ var initial_transform: Transform3D
 @onready var ball_thrown_node = $\"../../Player/TwistPivot/PitchPivot/Camera3D/RayCast_player\"
 @onready var reset_timer = $Timer
 
+signal pillar_reset
+
+
+
 func _ready():
 	ball_thrown_node.ball_thrown.connect(_on_ball_thrown)
 	initial_transform = global_transform
@@ -24,16 +28,22 @@ func _on_ball_thrown() -> void:
 		reset_timer.start() # Start the timer after the second throw
 
 
-func _on_timer_timeout():
+func pillar_reset_func()->void:
 
+	pass
+
+func _on_timer_timeout():
 	global_transform = initial_transform
 	global_transform.basis = Basis()
 
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+	number_of_throws = 0
+
+
 	
 	
-	number_of_throws = 0 # Reset the number of throws after reset
+
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llb7i"]
