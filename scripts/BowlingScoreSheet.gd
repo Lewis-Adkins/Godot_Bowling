@@ -3,15 +3,17 @@
 extends Sprite3D
 
 @onready var all_frames = get_node("../../frame_calculation").all_frames
-@onready var final_score = get_node("../../frame_calculation").final_score
+ 
 
 
 func filling_score_card()->void:
 	
-	print(final_score)
+	var final_score = get_node("../../frame_calculation").final_score
 	var number_of_frames: int = all_frames.size()+1
 	var scores_per_frame: int = 4 # Score per frame + 1 because of iterator... its really 3
 	var frame_labels: Node
+	
+	print(final_score)
 	
 	var final_score_label:Node
 	
@@ -41,5 +43,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	
 	filling_score_card()
+	
 	

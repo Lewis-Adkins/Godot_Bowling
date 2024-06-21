@@ -3,10 +3,11 @@ extends Node3D
 @onready var ball_thrown_node = $"../Player/TwistPivot/PitchPivot/Camera3D/RayCast_player"
 @onready var pillar_pyramid = $"../pillar_pyramid"
 
-
 @onready var next_frame_timer = get_node("next_frame_timer")
 @onready var strike_frame_timer = get_node("strike_spare_timer")
 @onready var pillar_reset_timer = get_node("pillar_reset_timer")
+
+@onready var final_score: int 
 
 var pillars_in_pyramid: int = 10
 var a_pillar: Node
@@ -18,7 +19,7 @@ var number_of_frames: int = 10
 var two_throw_frame_score: Vector3
 var two_throw_frame_score_combined : int
 
-var final_score: int = 0
+
 var final_score_label: int
 
 var all_frames : Dictionary
@@ -31,6 +32,7 @@ var spare_code: int = 10
 
 func _ready():
 	ball_thrown_node.ball_thrown.connect(_on_ball_thrown)
+	
 
 
 func record_throw_score(score: int) -> int:
@@ -47,14 +49,12 @@ func _on_ball_thrown() -> void:
 		
 func pillar_reset() -> void:
 	for pillar_index in range(1, pillars_in_pyramid + 1):
+		
 		var pillar_name = "pillar" + str(pillar_index)
 		var pillar_node = pillar_pyramid.get_node(pillar_name)
 
 		pillar_node._on_timer_timeout()
 
-			
-
-	
 func _on_next_frame_timer_timeout():
 
 	frame_index += 1
@@ -63,10 +63,7 @@ func _on_next_frame_timer_timeout():
 	your_frame += 1
 	two_throw_frame_score = Vector3(0,0,0)
 	
-	
-		
 	number_of_throws = 0
-
 
 	return [number_of_throws, your_frame, final_score]
 	
@@ -74,8 +71,6 @@ func strike():
 	number_of_throws = 0
 	next_frame_timer.start()
 	pillar_reset_timer.start()
-	print("pillar timer:", pillar_reset_timer.time_left)
-	print("frame timer:", next_frame_timer.time_left)
 
 func _on_strike_spare_timer_timeout():
 	next_frame_timer.start()
@@ -88,6 +83,7 @@ func store_throw_score(pins_knocked: int, two_throw_frame_score: Vector3, record
 	two_throw_frame_score[0] = recorded_throw_score
 	
 func _process(delta):
+
 
 	var sum_of_points = pillar_pyramid.sum_of_points
 	
@@ -111,4 +107,5 @@ func _process(delta):
 		
 	two_throw_frame_score_combined = two_throw_frame_score[0] + two_throw_frame_score[1]
 	two_throw_frame_score[2] = two_throw_frame_score_combined
+	
 	
