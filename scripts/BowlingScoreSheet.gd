@@ -4,8 +4,6 @@ extends Sprite3D
 
 @onready var all_frames = get_node("../../frame_calculation").all_frames
  
-
-
 func filling_score_card()->void:
 	
 	var final_score = get_node("../../frame_calculation").final_score
@@ -23,19 +21,17 @@ func filling_score_card()->void:
 	
 	final_score_label.set_text(final_score_input)
 
-	
-	
 	for frames in range(1, number_of_frames):
 		for scores in range(1, scores_per_frame):
 			frame_labels = get_node("Frame_"+str(frames)+"_"+str(scores))
 			
 			var score_input: String = str(all_frames["Frame #" + str(frames)][scores-1])
-			#
-			#if str(all_frames["Frame #" + str(frames)][0]) == "10":
-				#score_input = "X"
-				#
-			#if str(all_frames["Frame #" + str(frames)][1]) == "10":
-				#score_input = "/"
+			
+			if str(all_frames["Frame #" + str(frames)][0]) == "10":
+				score_input = "X"
+				
+			if str(all_frames["Frame #" + str(frames)][2]) == "10" && str(all_frames["Frame #" + str(frames)][0]) != "10"  :
+				score_input = "/"
 
 			frame_labels.set_text(score_input)
 
